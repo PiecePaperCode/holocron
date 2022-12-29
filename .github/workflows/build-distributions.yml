@@ -42,7 +42,7 @@ jobs:
       - name: package
         run: mvn clean package
       - name: download jmods
-        run: curl https://download2.gluonhq.com/openjfx/19/openjfx-19_windows-x86_bin-jmods.zip -L -O javafx-jmods-19.zip
+        run: curl "https://download2.gluonhq.com/openjfx/19/openjfx-19_windows-x86_bin-jmods.zip" -L -O javafx-jmods-19.zip
       - name: unpack jmods
         run: tar -xf javafx-jmods-19.zip
       - name: jlink
