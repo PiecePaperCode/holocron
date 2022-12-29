@@ -1,6 +1,8 @@
 package model
 
 class Tournament {
+    var name = ""
+
     private val players = ArrayList<Player>()
 
     fun addPlayer(player: Player) {

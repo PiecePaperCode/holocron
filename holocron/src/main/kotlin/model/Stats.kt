@@ -43,6 +43,10 @@ class Stats(
     fun getMissionPoints(): Int {
         return missionPoints
     }
+
+    override fun toString(): String {
+        return "$wins/$losses/$draws"
+    }
 }
 
 class Points {

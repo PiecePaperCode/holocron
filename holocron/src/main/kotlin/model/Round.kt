@@ -17,7 +17,10 @@ class Round (copyPlayers: List<Player>, copyPreviousRounds: List<Round>) {
         val scores = Score(previousRounds)
 
         if (previousRounds.isNotEmpty()) {
-            players = scores.generateScores().map { it.player } as ArrayList<Player>
+            players = scores.generateScores()
+                .map { it.player }
+                .filter { it in players }
+            as ArrayList<Player>
         } else {
             players.shuffle()
         }

@@ -1,14 +1,24 @@
+import controller.ServiceLocator
 import javafx.application.Application
-import javafx.scene.Scene
-import javafx.scene.layout.BorderPane
 import javafx.stage.Stage
 
+
 class MainApplication : Application() {
-    val scene = Scene(BorderPane(), 320.0, 240.0)
+    private val serviceLocator = ServiceLocator()
+    private val layout = serviceLocator.layout
+
+    init {
+        layout.scene.stylesheets.add(
+            MainApplication::class
+                .java
+                .getResource("style.css")
+                ?.toString() ?: ""
+        )
+    }
 
     override fun start(stage: Stage) {
-        stage.title = "Hello!"
-        stage.scene = scene
+        stage.title = "Holocron"
+        stage.scene = layout.scene
         stage.show()
     }
 }

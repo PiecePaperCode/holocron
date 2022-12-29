@@ -1,0 +1,36 @@
+.gap {
+    -fx-spacing: 20;
+    -fx-hgap: 20;
+    -fx-vgap: 20;
+}
+.button {
+    -fx-font-size: 20;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-text-background-color: white;
+    -fx-cursor: pointer;
+}
+.dark {
+    -fx-padding: 20;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-text-background-color: white;
+}
+.foreground {
+    -fx-padding: 20;
+    -fx-background-color: #f5f4f4;
+    -fx-text-fill: black;
+    -fx-text-background-color: black;
+}
+.background {
+    -fx-padding: 20;
+    -fx-background-color: #ececec;
+    -fx-text-fill: black;
+    -fx-text-background-color: black;
+}
+.title {
+    -fx-font-size: 40;
+}
+.H1 {
+    -fx-font-size: 25;
+}
