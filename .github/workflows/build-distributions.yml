@@ -22,7 +22,7 @@ jobs:
       - name: unpack jmods
         run: unzip javafx-jmods-19.zip
       - name: jlink
-        run: jlink --no-header-files --compress=2 --strip-debug -p javafx-jmods-19 --add-modules javafx.controls,javafx.base,javafx.graphics --output target/JRE
+        run: jlink --no-header-files --compress=2 --strip-debug -p javafx-jmods-19 --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics --output target/JRE
       - name: jpackage
         run: jpackage --type deb --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplication --runtime-image target/JRE/ --linux-shortcut --name holocron
       - name: publish
@@ -46,7 +46,7 @@ jobs:
       - name: unpack jmods
         run: tar -xf javafx-jmods-19.zip
       - name: jlink
-        run: jlink --no-header-files --compress=2 --strip-debug -p javafx-jmods-19 --add-modules javafx.controls,javafx.base,javafx.graphics --output target/JRE
+        run: jlink --no-header-files --compress=2 --strip-debug -p javafx-jmods-19 --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics --output target/JRE
       - name: jpackage
         run: jpackage --type msi --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplication --runtime-image target/JRE/ --name holocron
       - name: publish
@@ -70,7 +70,7 @@ jobs:
       - name: unpack jmods
         run: unzip javafx-jmods-19.zip
       - name: jlink
-        run: jlink --no-header-files --compress=2 --strip-debug --add-modules ALL-MODULE-PATH --output target/JRE
+        run: jlink --no-header-files --compress=2 --strip-debug -p javafx-jmods-19 --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics --output target/JRE
       - name: jpackage
         run: jpackage --type dmg --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplication --runtime-image target/JRE/ --name holocron
       - name: publish
