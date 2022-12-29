@@ -73,13 +73,13 @@ class Score(rounds: List<Round>) {
             (player, _) -> run {
                 val sumOpponentDivRounds = getOpponents(player)
                     .sumOf { opponent ->
-                        val opponentTotalEventPoints = stats[opponent]?.getPoints() ?: 1
-                        val opponentTotalRounds = getOpponents(opponent).size
-                        opponentTotalEventPoints / opponentTotalRounds
+                        val opponentTotalPoints: Double = (stats[opponent]?.getPoints() ?: 1.0).toDouble()
+                        val opponentTotalRounds = getOpponents(opponent).size.toDouble()
+                        opponentTotalPoints / opponentTotalRounds
                     }
-                var playerTotalRounds = getOpponents(player).size
-                if (playerTotalRounds == 0) {
-                    playerTotalRounds = 1
+                var playerTotalRounds = getOpponents(player).size.toDouble()
+                if (playerTotalRounds == 0.0) {
+                    playerTotalRounds = 1.0
                 }
                 val sos = sumOpponentDivRounds / playerTotalRounds
                 stats[player]?.creditSOS(sos)

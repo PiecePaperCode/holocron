@@ -4,7 +4,7 @@ class Stats(
     val player: Player,
 ) {
     private var points = 0
-    private var sos = 0
+    private var sos = 0.0
     private var missionPoints = 0
     private var wins = 0
     private var losses = 0
@@ -24,7 +24,7 @@ class Stats(
         draws ++
     }
 
-    fun creditSOS(sos: Int) {
+    fun creditSOS(sos: Double) {
         this.sos += sos
     }
 
@@ -36,7 +36,7 @@ class Stats(
         return points
     }
 
-    fun getSOS(): Int {
+    fun getSOS(): Double {
         return sos
     }
 
