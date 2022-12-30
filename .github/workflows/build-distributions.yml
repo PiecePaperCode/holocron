@@ -42,13 +42,13 @@ jobs:
       - name: package
         run: mvn clean package
       - name: download jmods
-        run: curl -L -o javafx-jmods-19.zip -0 https://download2.gluonhq.com/openjfx/19/openjfx-19_windows-x86_bin-jmods.zip
+        run: curl -L -o javafx-jmods-19.zip -0 https://download2.gluonhq.com/openjfx/19/openjfx-19_windows-x64_bin-jmods.zip
       - name: unpack jmods
         run: tar -xf javafx-jmods-19.zip
       - name: jlink
         run: jlink --no-header-files --compress=2 --strip-debug -p javafx-jmods-19 --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics --output target/JRE
       - name: jpackage
-        run: jpackage --type msi --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplication --runtime-image target/JRE/ --name holocron
+        run: jpackage --type msi --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplication --runtime-image target/JRE/ --win-shortcut --name holocron
       - name: publish
         uses: actions/upload-artifact@v3
         with:
