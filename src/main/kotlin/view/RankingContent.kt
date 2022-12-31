@@ -28,7 +28,7 @@ class RankingContent(serviceLocator: ServiceLocator): Interface {
             table.add(Label("Nr. ${index+1}"), 0, index + 1)
             table.add(Label(score.player.name), 1, index + 1)
             table.add(Label(score.getPoints().toString()), 2, index + 1)
-            table.add(Label(score.getSOS().toString()), 3, index + 1)
+            table.add(Label("%.3f".format(score.getSOS())), 3, index + 1)
             table.add(Label(score.getMissionPoints().toString()), 4, index + 1)
             table.add(Label(score.toString()), 5, index + 1)
 
