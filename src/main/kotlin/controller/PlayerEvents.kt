@@ -15,15 +15,8 @@ class PlayerEvents(serviceLocator: ServiceLocator) {
 
     val createNewPlayer: (name: String) -> Unit = {
         val newPlayer = Player(it)
-        if (serviceLocator.tournament.getRounds().size > 0) {
-            val alert = Alert(Alert.AlertType.ERROR)
-            alert.headerText = "The Tournament started already"
-            alert.contentText = "Players can't late join"
-            alert.show()
-        } else {
-            serviceLocator.tournament.addPlayer(newPlayer)
-            serviceLocator.setMainContent(PlayersView(serviceLocator).node)
-        }
+        serviceLocator.tournament.addPlayer(newPlayer)
+        serviceLocator.setMainContent(PlayersView(serviceLocator).node)
         SafeFile().save(serviceLocator.tournament)
     }
 

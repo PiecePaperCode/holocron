@@ -10,6 +10,9 @@ import model.Match
 class TournamentView(private val serviceLocator: ServiceLocator): ViewInterface {
     override var node = VBox()
     private val title = Title("Tournament").node
+    private val nameLabel = Label("Name")
+    private val name = TextField(serviceLocator.tournament.name)
+    private val nameNode = HBox(nameLabel, name)
     private val roundsTab = TabPane()
     private val tableScroll = ScrollPane()
     private val generateRound = Button("Generate Round")
@@ -22,9 +25,12 @@ class TournamentView(private val serviceLocator: ServiceLocator): ViewInterface 
         roundsTab.styleClass.addAll("foreground")
         tableScroll.content = roundsTab
         tableScroll.isFitToWidth = true
+        name.prefWidth = 500.0
+        nameNode.styleClass.addAll("gap", "foreground")
         buttonNode.styleClass.add("gap")
         node.children.addAll(
             title,
+            nameNode,
             tableScroll,
             buttonNode
         )
@@ -50,6 +56,12 @@ class TournamentView(private val serviceLocator: ServiceLocator): ViewInterface 
     }
 
     init {
+        name.focusedProperty().addListener{
+            _, _, gainedFocus ->
+                if (!gainedFocus) {
+                    serviceLocator.tournamentEvents.nameTournament(name.text)
+                }
+        }
         generateRound.addEventHandler(
             MouseEvent.MOUSE_CLICKED,
             serviceLocator.tournamentEvents.generateNewRound

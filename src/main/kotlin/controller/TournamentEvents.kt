@@ -9,6 +9,12 @@ import model.SafeFile
 import view.TournamentView
 
 class TournamentEvents(serviceLocator: ServiceLocator) {
+    val nameTournament: (name: String) -> Unit = {
+        serviceLocator.tournament.name = it
+        serviceLocator.setMainContent(TournamentView(serviceLocator).node)
+        SafeFile().save(serviceLocator.tournament)
+    }
+
     val generateNewRound: EventHandler<MouseEvent> = EventHandler {
         serviceLocator.tournament.nextRound()
         serviceLocator.setMainContent(TournamentView(serviceLocator).node)

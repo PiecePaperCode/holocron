@@ -43,6 +43,7 @@ class Round (copyPlayers: List<Player>, copyPreviousRounds: List<Round>) {
                     .map { it.player }
                     .filter { it in players }
             )
+            sortedPlayers.addAll(players.filter { it !in sortedPlayers })
         }
 
         var byeMatch: Match? = null
