@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 
-class CreatePlayer(serviceLocator: ServiceLocator): Interface {
+class CreatePlayer(serviceLocator: ServiceLocator): ViewInterface {
     override val node = VBox()
     private val title = Title("Create Player").node
     private val nameLabel = Label("Name")

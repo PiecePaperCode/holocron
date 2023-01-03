@@ -4,8 +4,9 @@ import javafx.event.EventHandler
 import javafx.scene.control.Alert
 import javafx.scene.input.MouseEvent
 import model.Player
+import model.SafeFile
 import view.CreatePlayer
-import view.PlayersContent
+import view.PlayersView
 
 class PlayerEvents(serviceLocator: ServiceLocator) {
     val selectNewPlayer: EventHandler<MouseEvent> = EventHandler {
@@ -21,14 +22,16 @@ class PlayerEvents(serviceLocator: ServiceLocator) {
             alert.show()
         } else {
             serviceLocator.tournament.addPlayer(newPlayer)
-            serviceLocator.setMainContent(PlayersContent(serviceLocator).node)
+            serviceLocator.setMainContent(PlayersView(serviceLocator).node)
         }
+        SafeFile().save(serviceLocator.tournament)
     }
 
     val deletePlayer: (index: Int) -> Unit = {
         serviceLocator.tournament.removePlayer(
             serviceLocator.tournament.getPlayers()[it]
         )
-        serviceLocator.setMainContent(PlayersContent(serviceLocator).node)
+        serviceLocator.setMainContent(PlayersView(serviceLocator).node)
+        SafeFile().save(serviceLocator.tournament)
     }
 }

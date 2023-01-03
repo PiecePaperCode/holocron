@@ -2,6 +2,6 @@ package view
 
 import javafx.scene.Node
 
-interface Interface {
+interface ViewInterface {
     val node: Node
 }

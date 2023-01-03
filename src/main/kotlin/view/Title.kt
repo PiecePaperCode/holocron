@@ -2,7 +2,7 @@ package view
 
 import javafx.scene.control.Label
 
-class Title(text: String, size: Size = Size.BIG): Interface {
+class Title(text: String, size: Size = Size.BIG): ViewInterface {
     override val node = Label(text)
 
     init {

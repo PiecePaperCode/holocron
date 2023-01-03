@@ -5,12 +5,12 @@ import javafx.scene.control.*
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.VBox
 
-class SideMenu(serviceLocator: ServiceLocator): Interface {
+class SideMenu(serviceLocator: ServiceLocator): ViewInterface {
     override val node = VBox()
     private val playersMenuItem = Button("Players")
     private val rankingMenuItem = Button("Ranking")
     private val tournamentMenuItem = Button("Tournament")
-    // private val settingsMenuItem = Button("Settings")
+    private val settingsMenuItem = Button("Settings")
 
     init {
         node.minWidth = 200.0
@@ -27,10 +27,15 @@ class SideMenu(serviceLocator: ServiceLocator): Interface {
             MouseEvent.MOUSE_CLICKED,
             serviceLocator.sideMenuEvents.selectTournament
         )
+        settingsMenuItem.addEventHandler(
+            MouseEvent.MOUSE_CLICKED,
+            serviceLocator.sideMenuEvents.selectSettings
+        )
         node.children.addAll(
             playersMenuItem,
             rankingMenuItem,
-            tournamentMenuItem
+            tournamentMenuItem,
+            settingsMenuItem
         )
     }
 }

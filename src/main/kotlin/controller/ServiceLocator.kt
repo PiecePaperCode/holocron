@@ -1,16 +1,14 @@
 package controller
 
-import javafx.scene.Node
 import javafx.scene.layout.VBox
-import model.Player
-import model.Tournament
-import view.CreatePlayer
+import model.SafeFile
 import view.Layout
 import view.SideMenu
-import view.TournamentContent
 
-class ServiceLocator {
-    val tournament = Tournament()
+class ServiceLocator() {
+    var tournament = SafeFile().load()
+
+
 
     val sideMenuEvents = SideMenuEvents(this)
     val sideMenu = SideMenu(this)
@@ -19,10 +17,12 @@ class ServiceLocator {
 
     val tournamentEvents = TournamentEvents(this)
 
+    val settingsEvents = SettingsEvents(this)
+
     val layout = Layout(this)
 
     fun setMainContent(node: VBox) {
-        layout.mainContent = node
+        layout.mainView = node
         layout.update()
     }
 }

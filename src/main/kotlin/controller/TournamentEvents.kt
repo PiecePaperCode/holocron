@@ -5,12 +5,14 @@ import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.scene.input.MouseEvent
 import model.Match
-import view.TournamentContent
+import model.SafeFile
+import view.TournamentView
 
 class TournamentEvents(serviceLocator: ServiceLocator) {
     val generateNewRound: EventHandler<MouseEvent> = EventHandler {
         serviceLocator.tournament.nextRound()
-        serviceLocator.setMainContent(TournamentContent(serviceLocator).node)
+        serviceLocator.setMainContent(TournamentView(serviceLocator).node)
+        SafeFile().save(serviceLocator.tournament)
     }
 
     val destroyLastRound: EventHandler<MouseEvent> = EventHandler {
@@ -21,7 +23,8 @@ class TournamentEvents(serviceLocator: ServiceLocator) {
         if (alert.result == ButtonType.OK) {
             serviceLocator.tournament.deleteCurrentRound()
         }
-        serviceLocator.setMainContent(TournamentContent(serviceLocator).node)
+        serviceLocator.setMainContent(TournamentView(serviceLocator).node)
+        SafeFile().save(serviceLocator.tournament)
     }
 
     val setMatchResult: (match: Match, point1: Int, point2: Int) -> Unit = {
@@ -36,6 +39,7 @@ class TournamentEvents(serviceLocator: ServiceLocator) {
                 }
             }
             serviceLocator
-                .setMainContent(TournamentContent(serviceLocator).node)
+                .setMainContent(TournamentView(serviceLocator).node)
+        SafeFile().save(serviceLocator.tournament)
     }
 }

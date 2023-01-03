@@ -1,12 +1,11 @@
 package view
 
-import javafx.geometry.Pos
 import javafx.scene.control.Label
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 
-class MainContent: Interface {
+class MainView: ViewInterface {
     override var node = VBox()
 
     init {

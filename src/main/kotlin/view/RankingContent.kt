@@ -1,13 +1,11 @@
 package view
 
 import controller.ServiceLocator
-import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.ScrollPane
-import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
 
-class RankingContent(serviceLocator: ServiceLocator): Interface {
+class RankingContent(serviceLocator: ServiceLocator): ViewInterface {
     override var node = VBox()
     private val title = Title("Ranking").node
     private val tableScroll = ScrollPane()

@@ -2,13 +2,14 @@ package controller
 
 import javafx.event.EventHandler
 import javafx.scene.input.MouseEvent
-import view.PlayersContent
+import view.PlayersView
 import view.RankingContent
-import view.TournamentContent
+import view.SettingsView
+import view.TournamentView
 
 class SideMenuEvents(serviceLocator: ServiceLocator) {
     val selectPlayers: EventHandler<MouseEvent> = EventHandler {
-        serviceLocator.setMainContent(PlayersContent(serviceLocator).node)
+        serviceLocator.setMainContent(PlayersView(serviceLocator).node)
     }
 
     val selectRanking: EventHandler<MouseEvent> = EventHandler {
@@ -16,6 +17,10 @@ class SideMenuEvents(serviceLocator: ServiceLocator) {
     }
 
     val selectTournament: EventHandler<MouseEvent> = EventHandler {
-        serviceLocator.setMainContent(TournamentContent(serviceLocator).node)
+        serviceLocator.setMainContent(TournamentView(serviceLocator).node)
+    }
+
+    val selectSettings: EventHandler<MouseEvent> = EventHandler {
+        serviceLocator.setMainContent(SettingsView(serviceLocator).node)
     }
 }

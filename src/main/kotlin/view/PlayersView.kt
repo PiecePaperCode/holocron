@@ -1,16 +1,11 @@
 package view
 
 import controller.ServiceLocator
-import javafx.collections.FXCollections
-import javafx.geometry.HPos
-import javafx.geometry.Pos
 import javafx.scene.control.*
-import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
-import model.Player
 
-class PlayersContent(serviceLocator: ServiceLocator): Interface {
+class PlayersView(serviceLocator: ServiceLocator): ViewInterface {
     override var node = VBox()
     private val title = Title("Players").node
     private val tableScroll = ScrollPane()

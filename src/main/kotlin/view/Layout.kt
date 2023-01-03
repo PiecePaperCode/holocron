@@ -6,13 +6,13 @@ import javafx.scene.layout.HBox
 
 class Layout(private var serviceLocator: ServiceLocator) {
     private var layout = HBox()
-    var mainContent = MainContent().node
+    var mainView = MainView().node
     var scene: Scene
 
     init {
         layout.children.addAll(
             serviceLocator.sideMenu.node,
-            mainContent
+            mainView
         )
         scene = Scene(layout, 1280.0, 720.0)
     }
@@ -21,7 +21,7 @@ class Layout(private var serviceLocator: ServiceLocator) {
         layout.children.clear()
         layout.children.addAll(
             serviceLocator.sideMenu.node,
-            mainContent
+            mainView
         )
     }
 }

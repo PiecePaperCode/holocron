@@ -3,7 +3,7 @@ package model
 class Round (copyPlayers: List<Player>, copyPreviousRounds: List<Round>) {
     private var players = ArrayList<Player>(copyPlayers)
     private val previousRounds = ArrayList<Round>(copyPreviousRounds)
-    private val matches = ArrayList<Match>()
+    private var matches = ArrayList<Match>()
     private val byes = mutableListOf<Player>()
 
     init {
@@ -26,6 +26,10 @@ class Round (copyPlayers: List<Player>, copyPreviousRounds: List<Round>) {
     }
 
     fun pairSwiss() {
+        if (previousRounds.size >= players.size - 1) {
+            return
+        }
+
         val scores = Score(previousRounds)
         val sortedPlayers = arrayListOf<Player>()
 
@@ -41,7 +45,17 @@ class Round (copyPlayers: List<Player>, copyPreviousRounds: List<Round>) {
             )
         }
 
-        // Pair players, avoiding rematches and giving byes to the lowest scoring players
+        var byeMatch: Match? = null
+        if (players.size % 2 == 1) {
+            for (player in sortedPlayers.reversed()) {
+                if (!byes.contains(player)) {
+                    byeMatch = Match(player, null)
+                    sortedPlayers.remove(player)
+                    break
+                }
+            }
+        }
+
         while (sortedPlayers.isNotEmpty()) {
             val player1 = sortedPlayers.first()
             sortedPlayers.remove(player1)
@@ -51,18 +65,18 @@ class Round (copyPlayers: List<Player>, copyPreviousRounds: List<Round>) {
                 .filter { !opponents.contains(it) }
 
             val player2 = if (availablePlayers.isNotEmpty()) {
-                availablePlayers.first()
-            } else{
-                byes.add(player1)
-                null
+                availablePlayers.take(3).random()
+            } else {
+                matches = arrayListOf()
+                pairSwiss()
+                return
             }
-
-            if (player2 != null) {
-                sortedPlayers.remove(player2)
-            }
-
+            sortedPlayers.remove(player2)
             matches.add(Match(player1, player2))
         }
 
+        if (byeMatch != null) {
+            matches.add(byeMatch)
+        }
     }
 }

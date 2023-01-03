@@ -34,6 +34,22 @@ class Score(rounds: List<Round>) {
             .reversed()
     }
 
+    fun getOpponents(player: Player): List<Player> {
+        val opponents = ArrayList<Player>()
+        matches
+            .filter { it.getPlayers().contains(player) }
+            .forEach {
+                    match -> when {
+                match.getPlayers().size == 1 -> {}
+                match.getPlayers()[0] == player ->
+                    opponents.add(match.getPlayers()[1])
+                match.getPlayers()[1] == player ->
+                    opponents.add(match.getPlayers()[0])
+            }
+            }
+        return opponents
+    }
+
     private fun generateStats() {
         matches.forEach{ creditStats(it) }
         matches.forEach{ creditMissionPoints(it) }
@@ -57,8 +73,10 @@ class Score(rounds: List<Round>) {
     private fun creditMissionPoints(match: Match) {
         when (match.getResult()) {
             Match.Result.PLAYER1, Match.Result.PLAYER2 -> {
-                stats[match.getWinner()]?.creditMissionPoints(match.getEventPoints().max())
-                stats[match.getLooser()]?.creditMissionPoints(match.getEventPoints().min())
+                stats[match.getWinner()]
+                    ?.creditMissionPoints(match.getEventPoints().max())
+                stats[match.getLooser()]
+                    ?.creditMissionPoints(match.getEventPoints().min())
             }
             Match.Result.DRAW ->
                 match.getPlayers().forEach {
@@ -73,8 +91,12 @@ class Score(rounds: List<Round>) {
             (player, _) -> run {
                 val sumOpponentDivRounds = getOpponents(player)
                     .sumOf { opponent ->
-                        val opponentTotalPoints: Double = (stats[opponent]?.getPoints() ?: 1.0).toDouble()
-                        val opponentTotalRounds = getOpponents(opponent).size.toDouble()
+                        val opponentTotalPoints: Double = (
+                            stats[opponent]?.getPoints() ?: 1.0
+                        ).toDouble()
+                        val opponentTotalRounds = getOpponents(opponent)
+                            .size
+                            .toDouble()
                         opponentTotalPoints / opponentTotalRounds
                     }
                 var playerTotalRounds = getOpponents(player).size.toDouble()
@@ -85,19 +107,5 @@ class Score(rounds: List<Round>) {
                 stats[player]?.creditSOS(sos)
             }
         }
-    }
-
-    fun getOpponents(player: Player): List<Player> {
-        val opponents = ArrayList<Player>()
-        matches
-            .filter { it.getPlayers().contains(player) }
-            .forEach {
-                match -> when {
-                    match.getPlayers().size == 1 -> {}
-                    match.getPlayers()[0] == player -> opponents.add(match.getPlayers()[1])
-                    match.getPlayers()[1] == player -> opponents.add(match.getPlayers()[0])
-                }
-            }
-        return opponents
     }
 }

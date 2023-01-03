@@ -7,7 +7,7 @@ import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
 import model.Match
 
-class TournamentContent(private val serviceLocator: ServiceLocator): Interface {
+class TournamentView(private val serviceLocator: ServiceLocator): ViewInterface {
     override var node = VBox()
     private val title = Title("Tournament").node
     private val roundsTab = TabPane()
