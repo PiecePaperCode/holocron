@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Holocron Tournament Software</title>
+    <style>
+        /* Add some styling to make the page look modern and sleek */
+        body {
+            font-family: "Arial", sans-serif;
+            color: #333;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin: 0 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 300px;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .card p {
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px 5px 0 0;
+        }
+
+        footer {
+            margin-top: auto;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .hero {
+            margin-top: 20vh; /* Set the height to be the full height of the viewport */
+            margin-bottom: 20vh;
+            display: flex; /* Enable flexbox layout */
+            flex-direction: column;
+            gap: 5vh;
+            align-items: center; /* Center the content vertically */
+            justify-content: center; /* Center the content horizontally */
+            text-align: center; /* Center the text */
+        }
+
+        .hero h1 {
+            font-size: 48px; /* Set the font size of the heading */
+            margin: 0; /* Remove the default margin */
+        }
+
+        .hero p {
+            font-size: 18px; /* Set the font size of the paragraph */
+            margin: 20px 0; /* Add a margin to the top and bottom of the paragraph */
+        }
+
+        .hero img {
+            width: 100%; /* Set the width of the image to be 100% of its container */
+            height: auto; /* Set the height to be proportional to the width */
+            border-radius: 5px; /* Add rounded corners to the image */
+        }
+        .hero-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+
+        .hero-button:hover {
+            background-color: #444;
+        }
+
+        .article {
+            font-family: "Arial", sans-serif;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .article h1 {
+            font-size: 36px;
+            margin: 0 0 20px 0;
+        }
+
+        .article a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .article a:hover {
+            text-decoration: underline;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Holocron</h1>
+    </header>
+    <div class="hero">
+        <h1>XWing Tournament Software</h1>
+        <p>Your one-stop solution for managing tournaments and keeping track of rankings.</p>
+        <a href="https://github.com/PiecePaperCode/holocron/releases" class="hero-button">Download</a>
+    </div>
+    <main>
+        <div class="card">
+            <img src="https://github.com/PiecePaperCode/holocron/blob/main/img/players.png?raw=true" alt="Players">
+            <h3>Players</h3>
+            <p>Add, remove, and edit players dynamically during a tournament. Pairings will be updated accordingly.</p>
+        </div>
+        <div class="card">
+            <img src="https://github.com/PiecePaperCode/holocron/blob/main/img/ranking.png?raw=true" alt="Rankings">
+            <h3>Rankings</h3>
+            <p>View the current rankings of all players in the tournament. Rankings are updated after each round.</p>
+        </div>
+        <div class="card">
+            <img src="https://github.com/PiecePaperCode/holocron/blob/main/img/tournament.png?raw=true" alt="Tournaments">
+            <h3>Tournaments</h3>
+            <p>Create and manage tournaments, including generating pairings using the Swiss system. Byes are given to the lowest-ranked player who has not yet received a bye.</p>
+        </div>
+    </main>
+    <div class="article">
+        <h1>The Open Source Solution for Managing Tournaments</h1>
+        <p>Hi there!</p>
+        <p>Are you looking to run a tournament and in need of some software to help manage it? Look no further than Holocron Tournament Software!</p>
+        <p>Holocron is an open source project that was created to help make running tournaments easier and more organized. With Holocron, you can easily add and remove players, view current rankings, and create and manage tournaments using the Swiss system. Plus, byes are automatically given to the lowest-ranked player who has not yet received one.</p>
+        <p>One of the best things about Holocron is that it's completely customizable. You can add and remove features as needed, and even contribute to the project by submitting your own code on GitHub.</p>
+        <p>So why wait? Give Holocron a try for your next tournament and see how much easier it can make things for you! Head on over to the <a href="https://github.com/PiecePaperCode/holocron/releases">releases page on GitHub</a> to download the latest version.</p>
+        <p>Happy tournament organizing!</p>
+    </div>
+    <footer>
+        <p>Copyright &copy; 2023 Holocron Tournament Software</p>
+    </footer>
+</div>
+</body>
+</html>
