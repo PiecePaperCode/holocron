@@ -22,7 +22,7 @@ class Round (copyPlayers: List<Player>, copyPreviousRounds: List<Round>) {
     }
 
     fun allMatchesDone(): Boolean {
-        return matches.all { it.getResult() != Match.Result.ONGOING }
+        return matches.any { it.getResult() != Match.Result.ONGOING }
     }
 
     fun pairSwiss() {
