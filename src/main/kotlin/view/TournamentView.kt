@@ -96,13 +96,13 @@ class TournamentView(private val serviceLocator: ServiceLocator): ViewInterface 
         val grid = GridPane()
         grid.styleClass.addAll("gap", "background")
         val col = ColumnConstraints()
-        col.percentWidth = 20.0
+        col.percentWidth = 33.3
         grid.columnConstraints.addAll(
             ColumnConstraints(50.0),
             col,
-            col,
+            ColumnConstraints(100.0),
             ColumnConstraints(10.0),
-            col,
+            ColumnConstraints(100.0),
             col
         )
         val tableNumberLabel = Label("Nr. $tableNumber")
@@ -114,7 +114,7 @@ class TournamentView(private val serviceLocator: ServiceLocator): ViewInterface 
             val playerName = Title(player.name, Title.Size.SMALL).node
             playerName.alignment = Pos.BASELINE_RIGHT
             when (player.name) {
-                match.getWinner()?.name -> playerName.text = "${playerName.text} ✅"
+                match.getWinner()?.name -> playerName.text = "${playerName.text} ✔️"
                 match.getLooser()?.name -> playerName.text = "${playerName.text} ❌"
             }
             if (index == 0) {

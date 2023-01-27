@@ -15,7 +15,7 @@ class PlayersView(serviceLocator: ServiceLocator): ViewInterface {
     init {
         table.styleClass.addAll("gap", "foreground")
         table.add(Title("Name", Title.Size.SMALL).node, 0, 0)
-        table.add(Title("", Title.Size.SMALL).node, 1, 0)
+        table.add(Title("XWT", Title.Size.SMALL).node, 1, 0)
 
         val players = serviceLocator.tournament.getPlayers()
         for ((index, player) in players.withIndex()) {
@@ -24,13 +24,16 @@ class PlayersView(serviceLocator: ServiceLocator): ViewInterface {
             button.addEventHandler(
                 MouseEvent.MOUSE_CLICKED
             ) { serviceLocator.playerEvents.deletePlayer(index) }
-            table.add(button, 1, index + 1)
+            table.add(Label(player.list), 1, index + 1)
+            table.add(button, 2, index + 1)
         }
         val col1 = ColumnConstraints()
-        col1.percentWidth = 85.0
+        col1.percentWidth = 25.0
         val col2 = ColumnConstraints()
-        col2.percentWidth = 15.0
-        table.columnConstraints.addAll(col1, col2)
+        col2.percentWidth = 60.0
+        val col3 = ColumnConstraints()
+        col3.percentWidth = 15.0
+        table.columnConstraints.addAll(col1, col2, col3)
         tableScroll.content = table
         tableScroll.isFitToWidth = true
     }

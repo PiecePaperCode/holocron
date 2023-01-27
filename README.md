@@ -8,6 +8,7 @@ Holocron is a tournament software written in Java 17 with the use of jlink and j
 ## Features
 - Swiss tournament support
 - 2.5 tournament rule support
+- Export Tournaments to ListFortress
 
 ## Installation
 
@@ -17,6 +18,7 @@ Native distributions can be found in the [releases](https://github.com/PiecePape
 
 Holocron is built on JavaFX and can be built with Maven. Simply run `mvn clean package` to create a jar file with all dependencies included.
 The resulting jar file can be found in the target directory and can be run with ´java -jar holocron.jar.
+
 ## Future Plans
 
 I plan to introduce more features to Holocron in the future, such as support for additional tournament rules and the ability to customize tournaments. Stay tuned!

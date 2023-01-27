@@ -3,6 +3,7 @@ package view
 import controller.ServiceLocator
 import javafx.scene.control.Button
 import javafx.scene.control.Label
+import javafx.scene.control.TextArea
 import javafx.scene.control.TextField
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.HBox
@@ -14,7 +15,9 @@ class CreatePlayer(serviceLocator: ServiceLocator): ViewInterface {
     private val title = Title("Create Player").node
     private val nameLabel = Label("Name")
     private val nameInput = TextField()
-    private val formNode = HBox(nameLabel, nameInput)
+    private val listLabel = Label("XWT List")
+    private val xwtInput = TextArea()
+    private val formNode = VBox(nameLabel, nameInput, listLabel, xwtInput)
     private val submitButton = Button("Create")
     private val cancelButton = Button("Cancel")
     private val buttonNode = HBox(submitButton, cancelButton)
@@ -22,7 +25,7 @@ class CreatePlayer(serviceLocator: ServiceLocator): ViewInterface {
     init {
         submitButton.addEventHandler(
             MouseEvent.MOUSE_CLICKED
-        ) { serviceLocator.playerEvents.createNewPlayer(nameInput.text) }
+        ) { serviceLocator.playerEvents.createNewPlayer(nameInput.text, xwtInput.text) }
         cancelButton.addEventHandler(
             MouseEvent.MOUSE_CLICKED,
             serviceLocator.sideMenuEvents.selectPlayers

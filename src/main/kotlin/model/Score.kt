@@ -1,7 +1,7 @@
 package model
 
 class Score(rounds: List<Round>) {
-    private val stats = hashMapOf<Player, Stats>()
+    private val stats = hashMapOf<String, Stats>()
     private val matches = arrayListOf<Match>()
 
     init {
@@ -13,7 +13,7 @@ class Score(rounds: List<Round>) {
         matches.forEach{
             match -> run {
                 for (player in match.getPlayers()) {
-                    stats[player] = Stats(player)
+                    stats[player.name] = Stats(player)
                 }
             }
         }
@@ -59,12 +59,12 @@ class Score(rounds: List<Round>) {
     private fun creditStats(match: Match) {
         when (match.getResult()) {
             Match.Result.PLAYER1, Match.Result.PLAYER2 -> {
-                stats[match.getWinner()]?.creditWin()
-                stats[match.getLooser()]?.creditLoss()
+                stats[match.getWinner()?.name]?.creditWin()
+                stats[match.getLooser()?.name]?.creditLoss()
             }
             Match.Result.DRAW ->
                 match.getPlayers().forEach {
-                    stats[it]?.creditDraw()
+                    stats[it.name]?.creditDraw()
                 }
             Match.Result.ONGOING -> { }
         }
@@ -73,14 +73,14 @@ class Score(rounds: List<Round>) {
     private fun creditMissionPoints(match: Match) {
         when (match.getResult()) {
             Match.Result.PLAYER1, Match.Result.PLAYER2 -> {
-                stats[match.getWinner()]
+                stats[match.getWinner()?.name]
                     ?.creditMissionPoints(match.getEventPoints().max())
-                stats[match.getLooser()]
+                stats[match.getLooser()?.name]
                     ?.creditMissionPoints(match.getEventPoints().min())
             }
             Match.Result.DRAW ->
                 match.getPlayers().forEach {
-                    stats[it]?.creditMissionPoints(match.getEventPoints()[0])
+                    stats[it.name]?.creditMissionPoints(match.getEventPoints()[0])
                 }
             Match.Result.ONGOING -> { }
         }
@@ -88,18 +88,18 @@ class Score(rounds: List<Round>) {
 
     private fun creditSOS() {
         stats.forEach{
-            (player, _) -> run {
-                val sumOpponentDivRounds = getOpponents(player)
+            (player, stat) -> run {
+                val sumOpponentDivRounds = getOpponents(stat.player)
                     .sumOf { opponent ->
                         val opponentTotalPoints: Double = (
-                            stats[opponent]?.getPoints() ?: 1.0
+                            stats[opponent.name]?.getPoints() ?: 1.0
                         ).toDouble()
                         val opponentTotalRounds = getOpponents(opponent)
                             .size
                             .toDouble()
                         opponentTotalPoints / opponentTotalRounds
                     }
-                var playerTotalRounds = getOpponents(player).size.toDouble()
+                var playerTotalRounds = getOpponents(stat.player).size.toDouble()
                 if (playerTotalRounds == 0.0) {
                     playerTotalRounds = 1.0
                 }
