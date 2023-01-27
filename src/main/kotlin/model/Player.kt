@@ -1,4 +1,6 @@
 package model
 
-class Player(var name: String)
-
+class Player(
+    val name: String,
+    val list: String = ""
+)
