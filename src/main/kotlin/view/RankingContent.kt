@@ -19,7 +19,7 @@ class RankingContent(serviceLocator: ServiceLocator): ViewInterface {
         table.add(Title("Points", Title.Size.SMALL).node, 2, 0)
         table.add(Title("SOS", Title.Size.SMALL).node, 3, 0)
         table.add(Title("Mission-Points", Title.Size.SMALL).node, 4, 0)
-        table.add(Title("Stats", Title.Size.SMALL).node, 5, 0)
+        table.add(Title("Stats W/L/D", Title.Size.SMALL).node, 5, 0)
 
         val scores = serviceLocator.tournament.getScores()
         for ((index, score) in scores.withIndex()) {
