@@ -37,4 +37,7 @@ The resulting jar file can be found in the target directory and can be run with
 
 I plan to introduce more features to Holocron in the future, such as support 
 for additional tournament rules and the ability to customize tournaments. 
-Stay tuned!
+Stay tuned! 
+
+Discuss it on 
+[Join Discord](https://discord.gg/y8Npbe9T6q)
