@@ -15,6 +15,7 @@ class ImportView(serviceLocator: ServiceLocator) : ViewInterface {
     private val description = Label("""
         Import your Tournament from t3.
         Enter your tournament id into the field to import players.
+        https://www.tabletopturniere.de/ch/t3_tournament.php?tid=<ID>
     """.trimIndent())
     private val textField = TextField()
     private val importButton = Button("Import")
@@ -22,7 +23,7 @@ class ImportView(serviceLocator: ServiceLocator) : ViewInterface {
     init {
         importButton.addEventHandler(
             MouseEvent.MOUSE_CLICKED
-        ) { serviceLocator.importEvents.importPlayers(textField.text.toInt()) }
+        ) { serviceLocator.importEvents.importPlayers(textField.text) }
         HBox.setHgrow(node, Priority.ALWAYS)
         node.styleClass.addAll("gap", "foreground")
         node.children.addAll(
