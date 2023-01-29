@@ -14,6 +14,7 @@ class SideMenu(serviceLocator: ServiceLocator): ViewInterface {
     private val playersMenuItem = Button("Players")
     private val rankingMenuItem = Button("Ranking")
     private val tournamentMenuItem = Button("Tournament")
+    private val importMenuItem = Button("Import")
     private val exportMenuItem = Button("Export")
     private val settingsMenuItem = Button("Settings")
 
@@ -38,6 +39,10 @@ class SideMenu(serviceLocator: ServiceLocator): ViewInterface {
             MouseEvent.MOUSE_CLICKED,
             serviceLocator.sideMenuEvents.selectTournament
         )
+        importMenuItem.addEventHandler(
+            MouseEvent.MOUSE_CLICKED,
+            serviceLocator.sideMenuEvents.selectImport
+        )
         exportMenuItem.addEventHandler(
             MouseEvent.MOUSE_CLICKED,
             serviceLocator.sideMenuEvents.selectExport
@@ -57,6 +62,7 @@ class SideMenu(serviceLocator: ServiceLocator): ViewInterface {
 
         bottom.alignment = Pos.BOTTOM_LEFT
         bottom.children.addAll(
+            importMenuItem,
             exportMenuItem,
             settingsMenuItem
         )

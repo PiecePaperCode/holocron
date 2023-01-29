@@ -17,6 +17,10 @@ class SideMenuEvents(serviceLocator: ServiceLocator) {
         serviceLocator.setMainContent(TournamentView(serviceLocator).node)
     }
 
+    val selectImport: EventHandler<MouseEvent> = EventHandler {
+        serviceLocator.setMainContent(ImportView(serviceLocator).node)
+    }
+
     val selectExport: EventHandler<MouseEvent> = EventHandler {
         serviceLocator.setMainContent(ExportView(serviceLocator).node)
     }

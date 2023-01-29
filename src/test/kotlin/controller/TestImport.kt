@@ -1,11 +1,12 @@
-package model
+package controller
 
 import TestStartup
 import kotlinx.coroutines.runBlocking
+import model.Player
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 
-class TestTournamentImport {
+class TestImport {
     @Test
     fun testParsingHTML() {
         val htmlToParse = TestStartup::class

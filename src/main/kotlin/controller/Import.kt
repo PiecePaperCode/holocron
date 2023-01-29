@@ -1,11 +1,11 @@
-package model
+package controller
 
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.http.*
+import model.Player
 
 class Import {
     private var html: String = ""
