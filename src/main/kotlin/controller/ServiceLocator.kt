@@ -17,6 +17,8 @@ class ServiceLocator() {
 
     val tournamentEvents = TournamentEvents(this)
 
+    val importEvents = ImportEvents(this)
+
     val exportEvents = ExportEvents()
 
     val settingsEvents = SettingsEvents(this)

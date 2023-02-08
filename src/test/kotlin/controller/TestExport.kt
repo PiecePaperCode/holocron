@@ -1,9 +1,11 @@
-package model
+package controller
 
+import model.Player
+import model.Tournament
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.*
 
-class TestTournamentExport {
+class TestExport {
     private var tournament = Tournament()
     private val player1 = Player("Tim")
     private val player2 = Player("Tom")

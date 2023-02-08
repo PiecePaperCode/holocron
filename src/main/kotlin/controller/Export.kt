@@ -1,7 +1,8 @@
-package model
+package controller
 
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
+import model.Tournament
 import java.security.MessageDigest
 import kotlin.text.Charsets.UTF_8
 
@@ -83,5 +84,7 @@ data class MatchExport(
     @SerializedName("player2points") val player2Points: Int
 )
 
-fun md5(str: String): String = MessageDigest.getInstance("MD5")
-    .digest(str.toByteArray(UTF_8)).toString()
+fun md5(str: String): String = MessageDigest
+    .getInstance("MD5")
+    .digest(str.toByteArray(UTF_8))
+    .toString()

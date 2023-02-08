@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
-import model.Export
+import controller.Export
 
 class ExportView(serviceLocator: ServiceLocator) : ViewInterface {
     override var node = VBox()
