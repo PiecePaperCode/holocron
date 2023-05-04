@@ -22,7 +22,7 @@ class TestImport {
         runBlocking {
             val parsedPlayers: List<Player> = Import().fetch(31293).parse()
             assertEquals("LowFreq", parsedPlayers[0].name)
-            assertEquals("DarkAngelus", parsedPlayers[10].name)
+            assertEquals("DarkAngelus", parsedPlayers[8].name)
         }
     }
 }
