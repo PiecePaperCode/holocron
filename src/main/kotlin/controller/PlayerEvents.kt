@@ -1,6 +1,8 @@
 package controller
 
 import javafx.event.EventHandler
+import javafx.scene.control.Alert
+import javafx.scene.control.ButtonType
 import javafx.scene.input.MouseEvent
 import model.Player
 import model.SafeFile
@@ -39,9 +41,17 @@ class PlayerEvents(serviceLocator: ServiceLocator) {
     }
 
     val deletePlayer: (index: Int) -> Unit = {
-        serviceLocator.tournament.removePlayer(
-            serviceLocator.tournament.getPlayers()[it]
-        )
+        val alert = Alert(Alert.AlertType.CONFIRMATION)
+        val player = serviceLocator.tournament.getPlayers()[it]
+        alert.headerText = "Delete Player?"
+        alert.contentText = "Are you Sure you want to delete ${player.name}"
+        alert.showAndWait()
+        if (alert.result == ButtonType.OK) {
+            serviceLocator.tournament.removePlayer(
+                serviceLocator.tournament.getPlayers()[it]
+            )
+        }
+
         serviceLocator.setMainContent(PlayersView(serviceLocator).node)
         SafeFile().save(serviceLocator.tournament)
     }
