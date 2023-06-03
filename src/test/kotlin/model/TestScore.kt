@@ -33,7 +33,7 @@ class TestScore {
 
     @Test
     fun testScore() {
-        val scores = Score(arrayListOf(round)).generateScores()
+        val scores = Score(tournament.getPlayers(), arrayListOf(round)).generateScores()
         assertEquals(3, scores[0].getPoints())
         assertEquals(3, scores[1].getPoints())
         assertEquals(1, scores[2].getPoints())
@@ -43,7 +43,7 @@ class TestScore {
 
     @Test
     fun testSOS() {
-        val scores = Score(arrayListOf(round)).generateScores()
+        val scores = Score(tournament.getPlayers(), arrayListOf(round)).generateScores()
         assertEquals(0.0, scores[0].getSOS())
         assertEquals(0.0, scores[1].getSOS())
         assertEquals(1.0, scores[2].getSOS())
@@ -53,7 +53,7 @@ class TestScore {
 
     @Test
     fun testMissionPoints() {
-        val scores = Score(arrayListOf(round)).generateScores()
+        val scores = Score(tournament.getPlayers(), arrayListOf(round)).generateScores()
         assertEquals(20, scores[0].getMissionPoints())
         assertEquals(18, scores[1].getMissionPoints())
         assertEquals(10, scores[2].getMissionPoints())
@@ -63,7 +63,7 @@ class TestScore {
 
     @Test
     fun testOpponents() {
-        val score = Score(arrayListOf(round))
+        val score = Score(tournament.getPlayers(), arrayListOf(round))
         val scores = score.generateScores()
         val opponents1 = score.getOpponents(scores[0].player)
         assertEquals(1, opponents1.size)
