@@ -11,6 +11,16 @@ class Tournament {
 
     fun getPlayers(): ArrayList<Player> = players
 
+    fun updatePlayer(name: String, list: String, uniqueID: String) {
+        val updatedPlayer = Player(name, list, uniqueID)
+        players.forEachIndexed { index, player ->
+            if (player == updatedPlayer) {
+                players[index] = updatedPlayer
+                return
+            }
+        }
+    }
+
     fun removePlayer(player: Player) {
         players.remove(player)
     }
@@ -32,8 +42,7 @@ class Tournament {
     }
 
     fun getScores(): List<Stats> {
-        val score = Score(rounds)
+        val score = Score(players, rounds)
         return score.generateScores()
     }
-
 }

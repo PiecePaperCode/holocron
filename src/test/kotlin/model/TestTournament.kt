@@ -20,6 +20,15 @@ class TestTournament {
         tournament.addPlayer(player3)
         tournament.addPlayer(player4)
         tournament.addPlayer(player5)
+        val random = Random()
+        tournament.nextRound()
+        tournament.getRounds().forEach{
+            round -> round.getMatches()
+            .forEach { match -> match.setMatchResult(
+                    random.nextInt(21), random.nextInt(21)
+                )
+            }
+        }
     }
 
     @Test
@@ -41,23 +50,30 @@ class TestTournament {
     }
 
     @Test
+    fun testUpdatePlayers() {
+        tournament.updatePlayer("Tim2", player1.list, player1.uniqueID)
+        assertEquals(tournament.getPlayers()[0].name, "Tim2")
+    }
+
+    @Test
     fun testCreateRound() {
         tournament.nextRound()
-        assertEquals(1, tournament.getRounds().size)
+        assertEquals(2, tournament.getRounds().size)
         tournament.deleteCurrentRound()
-        assertEquals(0, tournament.getRounds().size)
+        assertEquals(1, tournament.getRounds().size)
     }
 
     @Test
     fun testGetScores() {
-        val random = Random()
-        tournament.nextRound()
-        tournament.getRounds().forEach{
-            round -> round.getMatches()
-                .forEach {
-                    match -> match.setMatchResult(random.nextInt(21), random.nextInt(21))
-                }
-        }
         assertEquals(5, tournament.getScores().size)
+    }
+
+    @Test
+    fun testScoresAfterPlayerRename() {
+        tournament.updatePlayer("Tim2", player1.list, player1.uniqueID)
+        val updatedPlayer = tournament.getScores().first {
+            it.player.name == "Tim2"
+        }
+        assertEquals(updatedPlayer.player.name, "Tim2")
     }
 }

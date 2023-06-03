@@ -6,8 +6,8 @@
         /* Add some styling to make the page look modern and sleek */
         body {
             font-family: "Arial", sans-serif;
-            color: #333;
-            background-color: #f2f2f2;
+            color: #fff;
+            background-color: #111;
             margin: 0;
             padding: 0;
         }
@@ -19,23 +19,26 @@
             display: flex;
             flex-direction: column;
             padding: 20px;
+            gap: 10rem;
         }
 
         header {
-            background-color: #333;
-            color: #fff;
+            background-color: #000;
             padding: 20px;
+            text-align: center;
         }
 
         header h1 {
             margin: 0;
-            font-size: 36px;
+            font-size: 48px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 10px 0;
         }
 
         nav ul {
@@ -52,17 +55,19 @@
         nav a {
             text-decoration: none;
             font-size: 18px;
+            color: #fff;
         }
 
         main {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            margin-top: 30px;
         }
 
         .card {
-            background-color: #fff;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            background-color: #222;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
             transition: 0.3s;
             width: 300px;
             margin: 20px;
@@ -71,17 +76,19 @@
         }
 
         .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
         }
 
         .card h3 {
             margin: 0;
             font-size: 24px;
+            color: #fff;
         }
 
         .card p {
             margin: 20px 0;
             font-size: 14px;
+            color: #ccc;
         }
 
         .card img {
@@ -92,8 +99,8 @@
 
         footer {
             margin-top: auto;
-            background-color: #333;
-            color: #fff;
+            background-color: #000;
+            color: #ccc;
             padding: 20px;
             text-align: center;
         }
@@ -102,44 +109,49 @@
             margin: 0;
             font-size: 14px;
         }
+
         .hero {
-            margin-top: 20vh; /* Set the height to be the full height of the viewport */
-            margin-bottom: 20vh;
-            display: flex; /* Enable flexbox layout */
+            margin-top: 10vh;
+            margin-bottom: 10vh;
+            display: flex;
             flex-direction: column;
             gap: 5vh;
-            align-items: center; /* Center the content vertically */
-            justify-content: center; /* Center the content horizontally */
-            text-align: center; /* Center the text */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .hero h1 {
-            font-size: 48px; /* Set the font size of the heading */
-            margin: 0; /* Remove the default margin */
+            font-size: 48px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .hero p {
-            font-size: 18px; /* Set the font size of the paragraph */
-            margin: 20px 0; /* Add a margin to the top and bottom of the paragraph */
+            font-size: 18px;
+            margin: 20px 0;
+            color: #ccc;
         }
 
         .hero img {
-            width: 100%; /* Set the width of the image to be 100% of its container */
-            height: auto; /* Set the height to be proportional to the width */
-            border-radius: 5px; /* Add rounded corners to the image */
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
         }
+
         .hero-button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #333;
+            background-color: #000;
             color: #fff;
             text-decoration: none;
             border-radius: 4px;
             font-size: 18px;
+            transition: background-color 0.3s;
         }
 
         .hero-button:hover {
-            background-color: #444;
+            background-color: #222;
         }
 
         .article {
@@ -153,18 +165,17 @@
         .article h1 {
             font-size: 36px;
             margin: 0 0 20px 0;
+            color: #fff;
         }
 
         .article a {
-            color: #333;
+            color: #ccc;
             text-decoration: none;
         }
 
         .article a:hover {
             text-decoration: underline;
         }
-
-
     </style>
 </head>
 <body>
@@ -196,7 +207,6 @@
     </main>
     <div class="article">
         <h1>The Open Source Solution for Managing Tournaments</h1>
-        <p>Hi there!</p>
         <p>Are you looking to run a tournament and in need of some software to help manage it? Look no further than Holocron Tournament Software!</p>
         <p>Holocron is an open source project that was created to help make running tournaments easier and more organized. With Holocron, you can easily add and remove players, view current rankings, and create and manage tournaments using the Swiss system. Plus, byes are automatically given to the lowest-ranked player who has not yet received one.</p>
         <p>One of the best things about Holocron is that it's completely customizable. You can add and remove features as needed, and even contribute to the project by submitting your own code on GitHub.</p>
@@ -204,7 +214,7 @@
         <p>Happy tournament organizing!</p>
     </div>
     <footer>
-        <p>Copyright &copy; 2023 Holocron Tournament Software</p>
+        <p>&copy; 2023 Holocron Tournament Software. All rights reserved.</p>
     </footer>
 </div>
 </body>
