@@ -1,6 +1,6 @@
 package model
 
-class Score(rounds: List<Round>) {
+class Score(players: List<Player>, rounds: List<Round>) {
     private val stats = hashMapOf<Player, Stats>()
     private val matches = arrayListOf<Match>()
 
@@ -13,7 +13,8 @@ class Score(rounds: List<Round>) {
         matches.forEach{
             match -> run {
                 for (player in match.getPlayers()) {
-                    stats[player] = Stats(player)
+                    val actualPlayer = players.first { it == player }
+                    stats[actualPlayer] = Stats(actualPlayer)
                 }
             }
         }

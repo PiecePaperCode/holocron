@@ -30,7 +30,7 @@ class Round (copyPlayers: List<Player>, copyPreviousRounds: List<Round>) {
             return
         }
 
-        val scores = Score(previousRounds)
+        val scores = Score(players, previousRounds)
         val sortedPlayers = arrayListOf<Player>()
 
         if (previousRounds.isEmpty()){
