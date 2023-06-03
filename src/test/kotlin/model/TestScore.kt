@@ -19,7 +19,7 @@ class TestScore {
         player2 = Player("Tom")
         player3 = Player("Bob")
         player4 = Player("Lisa")
-        player5 = Player("Irina")
+        player5 = Player("Tom") // duplicate
         tournament.addPlayer(player1)
         tournament.addPlayer(player2)
         tournament.addPlayer(player3)
