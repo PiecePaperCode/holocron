@@ -10,7 +10,7 @@
 Holocron is a tournament management program for X-Wing Miniatures. Easily 
 generate pairings, track scores, and determine winners with our user-friendly 
 interface. Perfect for tournament organizers looking to streamline their events.
-Holocron is a tournament software written in Java 17 with the use of jlink and 
+Holocron is a tournament software built with JDK 27 with the use of jlink and
 jpackage to produce native executables for Windows, Linux, and MacOS.
 
 
@@ -28,10 +28,18 @@ and run it.
 
 ## Building
 
-Holocron is built on JavaFX and can be built with Maven. Simply run 
-`mvn clean package` to create a jar file with all dependencies included.
-The resulting jar file can be found in the target directory and can be run with 
-´java -jar holocron.jar.
+Holocron requires JDK 27 and Maven. Set `JAVA_HOME` to your JDK 27 installation
+(and select JDK 27 as the project SDK and Maven runner JDK in IntelliJ).
+Run `mvn clean verify` to run the tests and create a jar with all dependencies.
+On Linux, `xvfb-run -a mvn clean verify` also runs the JavaFX application smoke
+test when a physical display is unavailable.
+
+Run the app with `mvn javafx:run`, or run the packaged jar with
+`java --enable-native-access=ALL-UNNAMED -jar target/holocron-0.1-SNAPSHOT.jar`.
+
+The build uses Kotlin 2.4.21 and JavaFX 27.0.1. Java and Kotlin both target
+Java 26 bytecode, the highest target supported by stable Kotlin 2.4, while
+building and running on JDK 27.
 
 ## Future Plans
 

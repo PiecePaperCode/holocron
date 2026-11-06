@@ -9,78 +9,72 @@ jobs:
   linux:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - name: Set up JDK 27
+        uses: actions/setup-java@v5
         with:
-          java-version: '17'
-          distribution: 'adopt'
-      - name: test
-        run: mvn clean test
-      - name: package
-        run: mvn clean package
+          java-version: '27'
+          distribution: 'temurin'
+      - name: test and package
+        run: xvfb-run -a mvn clean verify
       - name: download jmods
-        run: wget https://download2.gluonhq.com/openjfx/19/openjfx-19_linux-x64_bin-jmods.zip -O javafx-jmods-19.zip
+        run: wget https://download2.gluonhq.com/openjfx/27.0.1/openjfx-27.0.1_linux-x64_bin-jmods.zip -O javafx-jmods-27.0.1.zip
       - name: unpack jmods
-        run: unzip javafx-jmods-19.zip
+        run: unzip javafx-jmods-27.0.1.zip
       - name: jlink
-        run: jlink --no-header-files --compress=2 --strip-debug -p javafx-jmods-19 --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics --output target/JRE
+        run: jlink --no-header-files --compress=zip-6 --strip-debug -p javafx-jmods-27.0.1 --add-modules javafx.controls,javafx.fxml,java.instrument,java.management,java.scripting,java.sql,jdk.crypto.ec,jdk.jfr,jdk.unsupported --output target/JRE
       - name: jpackage
-        run: jpackage --type deb --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplication --runtime-image target/JRE/ --linux-shortcut --name holocron
+        run: jpackage --type deb --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplicationKt --java-options "--enable-native-access=javafx.graphics,ALL-UNNAMED" --runtime-image target/JRE/ --linux-shortcut --name holocron
       - name: publish
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux-dist
           path: holocron_*_amd64.deb
   windows:
     runs-on: windows-2022
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - name: Set up JDK 27
+        uses: actions/setup-java@v5
         with:
-          java-version: '17'
-          distribution: 'adopt'
-      - name: test
-        run: mvn clean test
-      - name: package
-        run: mvn clean package
+          java-version: '27'
+          distribution: 'temurin'
+      - name: test and package
+        run: mvn clean verify
       - name: download jmods
-        run: curl -L -o javafx-jmods-19.zip -0 https://download2.gluonhq.com/openjfx/19/openjfx-19_windows-x64_bin-jmods.zip
+        run: curl -L -o javafx-jmods-27.0.1.zip -0 https://download2.gluonhq.com/openjfx/27.0.1/openjfx-27.0.1_windows-x64_bin-jmods.zip
       - name: unpack jmods
-        run: tar -xf javafx-jmods-19.zip
+        run: tar -xf javafx-jmods-27.0.1.zip
       - name: jlink
-        run: jlink --no-header-files --compress=2 --strip-debug -p javafx-jmods-19 --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics --output target/JRE
+        run: jlink --no-header-files --compress=zip-6 --strip-debug -p javafx-jmods-27.0.1 --add-modules javafx.controls,javafx.fxml,java.instrument,java.management,java.scripting,java.sql,jdk.crypto.ec,jdk.jfr,jdk.unsupported --output target/JRE
       - name: jpackage
-        run: jpackage --type msi --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplication --runtime-image target/JRE/ --win-shortcut --name holocron
+        run: jpackage --type msi --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplicationKt --java-options "--enable-native-access=javafx.graphics,ALL-UNNAMED" --runtime-image target/JRE/ --win-shortcut --name holocron
       - name: publish
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: windows-dist
           path: holocron-*.msi
   darwin:
-    runs-on: macos-11
+    runs-on: macos-15-intel
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - name: Set up JDK 27
+        uses: actions/setup-java@v5
         with:
-          java-version: '17'
-          distribution: 'adopt'
-      - name: test
-        run: mvn clean test
-      - name: package
-        run: mvn clean package
+          java-version: '27'
+          distribution: 'temurin'
+      - name: test and package
+        run: mvn clean verify
       - name: download jmods
-        run: curl -L -o javafx-jmods-19.zip -0 https://download2.gluonhq.com/openjfx/19/openjfx-19_osx-x64_bin-jmods.zip
+        run: curl -L -o javafx-jmods-27.0.1.zip -0 https://download2.gluonhq.com/openjfx/27.0.1/openjfx-27.0.1_osx-x64_bin-jmods.zip
       - name: unpack jmods
-        run: unzip javafx-jmods-19.zip
+        run: unzip javafx-jmods-27.0.1.zip
       - name: jlink
-        run: jlink --no-header-files --compress=2 --strip-debug -p javafx-jmods-19 --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics --output target/JRE
+        run: jlink --no-header-files --compress=zip-6 --strip-debug -p javafx-jmods-27.0.1 --add-modules javafx.controls,javafx.fxml,java.instrument,java.management,java.scripting,java.sql,jdk.crypto.ec,jdk.jfr,jdk.unsupported --output target/JRE
       - name: jpackage
-        run: jpackage --type dmg --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplication --runtime-image target/JRE/ --name holocron
+        run: jpackage --type dmg --input target/ --main-jar holocron-0.1-SNAPSHOT.jar --main-class MainApplicationKt --java-options "--enable-native-access=javafx.graphics,ALL-UNNAMED" --runtime-image target/JRE/ --name holocron
       - name: publish
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: darwin-dist
           path: holocron-*.dmg
