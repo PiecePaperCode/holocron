@@ -7,7 +7,10 @@ import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
 import model.Match
 
-class TournamentView(private val serviceLocator: ServiceLocator): ViewInterface {
+class TournamentView(
+    private val serviceLocator: ServiceLocator,
+    selectedRoundIndex: Int = serviceLocator.tournament.getRounds().lastIndex
+): ViewInterface {
     override var node = VBox()
     private val title = Title("Tournament").node
     private val nameLabel = Label("Name")
@@ -55,7 +58,9 @@ class TournamentView(private val serviceLocator: ServiceLocator): ViewInterface 
             roundsTab.tabs.add(tab)
         }
         val lastTab = roundsTab.tabs.size - 1
-        roundsTab.selectionModel.select(lastTab)
+        if (lastTab >= 0) {
+            roundsTab.selectionModel.select(selectedRoundIndex.coerceIn(0, lastTab))
+        }
 
     }
 

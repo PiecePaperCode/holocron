@@ -34,18 +34,13 @@ class TournamentEvents(serviceLocator: ServiceLocator) {
     }
 
     val setMatchResult: (match: Match, point1: Int, point2: Int) -> Unit = {
-        match, point1, point2 -> serviceLocator
-            .tournament
-            .getRounds()
-            .forEach{ round ->
-                round.getMatches().forEach{
-                    if (it == match) {
-                        it.setMatchResult(point1, point2)
-                    }
-                }
+        match, point1, point2 ->
+            val roundIndex = serviceLocator.tournament.getRounds().indexOfFirst { round ->
+                match in round.getMatches()
             }
+            if (roundIndex >= 0) match.setMatchResult(point1, point2)
             serviceLocator
-                .setMainContent(TournamentView(serviceLocator).node)
+                .setMainContent(TournamentView(serviceLocator, roundIndex).node)
         SafeFile().save(serviceLocator.tournament)
     }
 }
