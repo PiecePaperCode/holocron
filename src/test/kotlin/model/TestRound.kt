@@ -29,6 +29,17 @@ class TestRound {
     }
 
     @Test
+    fun testAllMatchesMustBeDoneIncludingRoundsWithByes() {
+        round.pairSwiss()
+        assertFalse(round.allMatchesDone())
+        val matches = round.getMatches().filter { it.getResult() == Match.Result.ONGOING }
+        matches.first().setMatchResult(10, 5)
+        assertFalse(round.allMatchesDone())
+        matches.last().setMatchResult(5, 10)
+        assertTrue(round.allMatchesDone())
+    }
+
+    @Test
     fun testPairings() {
         round.pairSwiss()
         assertEquals(3, round.getMatches().size)

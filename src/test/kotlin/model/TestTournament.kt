@@ -32,6 +32,37 @@ class TestTournament {
     }
 
     @Test
+    fun testFinishedTournamentDoesNotCreateEmptyRounds() {
+        val event = Tournament()
+        event.addPlayer(player1)
+        event.addPlayer(player2)
+        assertFalse(event.isFinished())
+        assertTrue(event.canGenerateNextRound())
+        event.nextRound()
+        assertFalse(event.canGenerateNextRound())
+        assertFalse(event.isFinished())
+        event.getRounds().single().getMatches().single().setMatchResult(10, 5)
+        assertTrue(event.isFinished())
+        event.nextRound()
+        assertEquals(1, event.getRounds().size)
+        event.deleteCurrentRound()
+        assertFalse(event.isFinished())
+        assertTrue(event.canGenerateNextRound())
+    }
+
+    @Test
+    fun testInsufficientPlayersAreNotFinished() {
+        val event = Tournament()
+        for (player in listOf(null, player1)) {
+            if (player != null) event.addPlayer(player)
+            event.nextRound()
+            assertTrue(event.getRounds().isEmpty())
+            assertFalse(event.isFinished())
+            assertFalse(event.canGenerateNextRound())
+        }
+    }
+
+    @Test
     fun testAddPlayer() {
         val player = Player("Tim1")
         tournament.addPlayer(player)

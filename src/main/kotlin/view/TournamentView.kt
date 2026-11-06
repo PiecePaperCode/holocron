@@ -34,6 +34,10 @@ class TournamentView(private val serviceLocator: ServiceLocator): ViewInterface 
             tableScroll,
             buttonNode
         )
+        generateRound.isDisable = !serviceLocator.tournament.canGenerateNextRound()
+        if (serviceLocator.tournament.isFinished()) {
+            node.children.add(Label("Tournament finished"))
+        }
     }
 
     init {

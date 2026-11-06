@@ -28,10 +28,16 @@ class Tournament {
     private val rounds = ArrayList<Round>()
 
     fun nextRound() {
+        if (!canGenerateNextRound()) return
         val round = Round(ArrayList(players), ArrayList(rounds))
         round.pairSwiss()
-        rounds.add(round)
+        if (round.getMatches().isNotEmpty()) rounds.add(round)
     }
+
+    fun canGenerateNextRound(): Boolean = players.size >= 2 && rounds.size < players.size - 1
+
+    fun isFinished(): Boolean = rounds.isNotEmpty() && !canGenerateNextRound() &&
+        rounds.all { it.allMatchesDone() }
 
     fun getRounds(): ArrayList<Round> {
         return rounds
