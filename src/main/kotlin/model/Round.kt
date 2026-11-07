@@ -17,6 +17,11 @@ class Round (copyPlayers: List<Player>, copyPreviousRounds: List<Round>) {
         }
     }
 
+    internal constructor(players: List<Player>, previousRounds: List<Round>, savedMatches: List<Match>) :
+        this(players, previousRounds) {
+        matches.addAll(savedMatches)
+    }
+
     fun getMatches(): List<Match> {
         return matches
     }
