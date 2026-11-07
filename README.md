@@ -1,18 +1,25 @@
-# Holocron - XWing Tournament Software
+# Holocron - X-Wing Tournament Software
 
+Holocron is a desktop app for running X-Wing Miniatures tournaments. Manage
+players, generate Swiss pairings, enter scores, and follow the standings.
 
-![](https://github.com/PiecePaperCode/holocron/raw/main/img/tournament.png)
+![Holocron overview with tournament counts, quick actions, and the current top three players](img/overview.png)
 
-## Description
+The home screen puts player and round counts alongside quick actions. When
+standings are available, it also shows the current top three players and their
+points.
 
-<img src="https://github.com/PiecePaperCode/holocron/raw/develop/img/logo.png" height="100" width="100" alt="holocron logo">
+## Screenshots
 
-Holocron is a tournament management program for X-Wing Miniatures. Easily 
-generate pairings, track scores, and determine winners with our user-friendly 
-interface. Perfect for tournament organizers looking to streamline their events.
-Holocron is a tournament software built with JDK 26 with the use of jlink and
-jpackage to produce native executables for Windows, Linux, and MacOS.
+These screenshots show the current design with a sample six-player tournament.
 
+| Players | Tournament |
+| :---: | :---: |
+| [![Player management](img/players.png)](img/players.png) | [![Round pairings and scores](img/tournament.png)](img/tournament.png) |
+| Manage players and squad lists. | Switch rounds and enter match scores. |
+| **Ranking** | **Export** |
+| [![Tournament standings](img/ranking.png)](img/ranking.png) | [![Tournament JSON export](img/export.png)](img/export.png) |
+| Follow points, tiebreakers, and match records. | Copy tournament data as JSON. |
 
 ## Features
 - Swiss tournament support
@@ -43,21 +50,9 @@ building and running on JDK 26.
 
 ## Future Plans
 
-I plan to introduce more features to Holocron in the future, such as support 
-for additional tournament rules and the ability to customize tournaments. 
-Stay tuned! 
+I plan to introduce more features to Holocron in the future, such as support
+for additional tournament rules and the ability to customize tournaments.
+Stay tuned!
 
-Discuss it on 
+Discuss it on
 [Join Discord](https://discord.gg/y8Npbe9T6q)
-
-## Saved tournament data
-
-Tournament state is stored in SQLite as `holocron.db` next to the launched
-executable on Windows, macOS, and Linux. When running a JAR directly, the database
-is next to the JAR; IDE and Maven runs save in the compiled classes directory
-(typically `target/classes`). This directory
-must be writable. No separate database installation is needed. Saves replace the tournament in a single transaction, preserving the
-previous save if a write fails. Close Holocron before copying this file for backup.
-
-On first use, Holocron starts with an empty tournament. Resetting the tournament
-clears its saved SQLite data. JSON exports remain available for ListFortress.
