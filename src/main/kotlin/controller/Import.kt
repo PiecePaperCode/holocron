@@ -7,7 +7,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import model.Player
 
-class Import {
+class Import(private val baseUrl: String = "https://www.tabletoptournaments.net") {
     private var html: String = ""
     private val regex  = "<a href=\"/player/(.+)\" title=\"(.+)\">&quot;(.+)&quot;</a>".toRegex()
 
@@ -26,10 +26,11 @@ class Import {
         return players
     }
     suspend fun fetch(tournamentId: Int): Import {
-        val url = "https://www.tabletoptournaments.net/t3_tournament_list.php?tid=${tournamentId}"
-        val client = HttpClient(CIO)
-        val response: HttpResponse = client.get(url)
-        html = response.body()
+        val url = "$baseUrl/t3_tournament_list.php?tid=${tournamentId}"
+        HttpClient(CIO) { expectSuccess = true }.use { client ->
+            val response: HttpResponse = client.get(url)
+            html = response.body()
+        }
         return this
     }
 }
