@@ -48,6 +48,24 @@ The build uses Kotlin 2.4.21 and JavaFX 26.0.1. Java and Kotlin both target
 Java 26 bytecode, the highest target supported by stable Kotlin 2.4, while
 building and running on JDK 26.
 
+## Releasing
+
+After committing and pushing the release changes, create and push a version tag:
+
+```sh
+git tag v0.2.0
+git push origin v0.2.0
+```
+
+Use a new `v`-prefixed version for each release. GitHub Actions builds and tests
+the tagged commit on Linux, Windows, and macOS. Once all three builds succeed,
+it creates a GitHub Release with generated release notes and attaches the
+`.deb`, `.msi`, and `.dmg` installers. The workflow uses the built-in
+`GITHUB_TOKEN`; no additional release secret is needed.
+
+Pushes to `main` and `develop` continue to build installers as workflow artifacts
+without creating a release.
+
 ## Future Plans
 
 I plan to introduce more features to Holocron in the future, such as support

@@ -5,6 +5,10 @@ on:
     branches:
       - main
       - develop
+    tags:
+      - 'v*'
+permissions:
+  contents: read
 jobs:
   linux:
     runs-on: ubuntu-22.04
@@ -30,6 +34,7 @@ jobs:
         with:
           name: linux-dist
           path: holocron_*_amd64.deb
+          if-no-files-found: error
   windows:
     runs-on: windows-2022
     steps:
@@ -54,6 +59,7 @@ jobs:
         with:
           name: windows-dist
           path: holocron-*.msi
+          if-no-files-found: error
   darwin:
     runs-on: macos-15-intel
     steps:
@@ -78,3 +84,28 @@ jobs:
         with:
           name: darwin-dist
           path: holocron-*.dmg
+          if-no-files-found: error
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [linux, windows, darwin]
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download installers
+        uses: actions/download-artifact@v4
+        with:
+          pattern: '*-dist'
+          path: dist
+          merge-multiple: true
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$RELEASE_TAG" \
+            dist/*.deb dist/*.msi dist/*.dmg \
+            --verify-tag \
+            --title "$RELEASE_TAG" \
+            --generate-notes
