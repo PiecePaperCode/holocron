@@ -1,71 +1,53 @@
 package view
 
 import controller.ServiceLocator
-import javafx.geometry.Pos
-import javafx.scene.control.*
+import javafx.css.PseudoClass
+import javafx.event.EventHandler
+import javafx.scene.control.Button
+import javafx.scene.control.Label
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 
 class SideMenu(serviceLocator: ServiceLocator): ViewInterface {
     override val node = VBox()
-    private val top = VBox()
-    private val bottom = VBox()
-    private val playersMenuItem = Button("Players")
-    private val rankingMenuItem = Button("Ranking")
-    private val tournamentMenuItem = Button("Tournament")
-    private val importMenuItem = Button("Import")
-    private val exportMenuItem = Button("Export")
-    private val settingsMenuItem = Button("Settings")
+    private val selected = PseudoClass.getPseudoClass("selected")
+    private val items = linkedMapOf<String, Button>()
+
+    private fun item(id: String, text: String, handler: EventHandler<MouseEvent>): Button =
+        Button(text).apply {
+            maxWidth = Double.MAX_VALUE
+            addEventHandler(MouseEvent.MOUSE_CLICKED, handler)
+            items[id] = this
+        }
 
     init {
-        node.minWidth = 200.0
-        node.styleClass.addAll("dark")
-        top.styleClass.addAll("gap")
-        bottom.styleClass.addAll("gap")
-        VBox.setVgrow(bottom, Priority.ALWAYS)
+        node.prefWidth = 220.0
+        node.minWidth = 220.0
+        node.styleClass.add("sidebar")
+        val brand = VBox(
+            Label("HOLOCRON").apply { styleClass.add("brand") },
+            Label("X-WING TOURNAMENTS").apply { styleClass.add("eyebrow") }
+        ).apply { styleClass.add("brand-block") }
+        val top = VBox(
+            item("overview", "OVERVIEW", EventHandler {
+                serviceLocator.setMainContent(MainView(serviceLocator).node)
+            }),
+            item("players", "PLAYERS", serviceLocator.sideMenuEvents.selectPlayers),
+            item("tournament", "TOURNAMENT", serviceLocator.sideMenuEvents.selectTournament),
+            item("ranking", "RANKING", serviceLocator.sideMenuEvents.selectRanking)
+        ).apply { styleClass.add("nav-group") }
+        val spacer = VBox().apply { VBox.setVgrow(this, Priority.ALWAYS) }
+        val bottom = VBox(
+            item("import", "IMPORT", serviceLocator.sideMenuEvents.selectImport),
+            item("export", "EXPORT", serviceLocator.sideMenuEvents.selectExport),
+            item("settings", "SETTINGS", serviceLocator.sideMenuEvents.selectSettings)
+        ).apply { styleClass.add("nav-group") }
+        node.children.addAll(brand, top, spacer, bottom)
+        select("overview")
     }
 
-    init {
-        playersMenuItem.addEventHandler(
-            MouseEvent.MOUSE_CLICKED,
-            serviceLocator.sideMenuEvents.selectPlayers
-        )
-        rankingMenuItem.addEventHandler(
-            MouseEvent.MOUSE_CLICKED,
-            serviceLocator.sideMenuEvents.selectRanking
-        )
-        tournamentMenuItem.addEventHandler(
-            MouseEvent.MOUSE_CLICKED,
-            serviceLocator.sideMenuEvents.selectTournament
-        )
-        importMenuItem.addEventHandler(
-            MouseEvent.MOUSE_CLICKED,
-            serviceLocator.sideMenuEvents.selectImport
-        )
-        exportMenuItem.addEventHandler(
-            MouseEvent.MOUSE_CLICKED,
-            serviceLocator.sideMenuEvents.selectExport
-        )
-        settingsMenuItem.addEventHandler(
-            MouseEvent.MOUSE_CLICKED,
-            serviceLocator.sideMenuEvents.selectSettings
-        )
-    }
-
-    init {
-        top.children.addAll(
-            playersMenuItem,
-            rankingMenuItem,
-            tournamentMenuItem
-        )
-
-        bottom.alignment = Pos.BOTTOM_LEFT
-        bottom.children.addAll(
-            importMenuItem,
-            exportMenuItem,
-            settingsMenuItem
-        )
-        node.children.addAll(top, bottom)
+    fun select(id: String?) {
+        items.forEach { (key, button) -> button.pseudoClassStateChanged(selected, key == id) }
     }
 }

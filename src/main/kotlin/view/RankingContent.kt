@@ -12,6 +12,7 @@ class RankingContent(serviceLocator: ServiceLocator): ViewInterface {
     private val table = GridPane()
 
     init {
+        node.id = "ranking"
         HBox.setHgrow(node, Priority.ALWAYS)
         table.styleClass.addAll("gap", "foreground")
         table.add(Title("Rank", Title.Size.SMALL).node, 0, 0)

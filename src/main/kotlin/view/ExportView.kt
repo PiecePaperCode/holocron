@@ -18,16 +18,19 @@ class ExportView(serviceLocator: ServiceLocator) : ViewInterface {
         Copy this string to ListJuggler.
     """.trimIndent())
     private val textField = TextArea(Export().toJson(serviceLocator.tournament))
-    private val clipboardButton = Button("Copy to Clipboard")
+    private val clipboardButton = Button("Copy to Clipboard").apply { styleClass.add("primary") }
 
     init {
-        textField.prefRowCount = 100
+        textField.prefRowCount = 12
+        VBox.setVgrow(textField, Priority.ALWAYS)
         textField.isWrapText = true
         clipboardButton.addEventHandler(
             MouseEvent.MOUSE_CLICKED
         ) { serviceLocator.exportEvents.copyToClipboard(textField.text) }
+        node.id = "export"
         HBox.setHgrow(node, Priority.ALWAYS)
-        node.styleClass.addAll("gap", "foreground")
+        node.styleClass.addAll("gap", "background")
+        description.isWrapText = true
         node.children.addAll(
             title,
             description,

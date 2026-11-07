@@ -18,8 +18,8 @@ class CreatePlayer(serviceLocator: ServiceLocator): ViewInterface {
     private val listLabel = Label("XWT List")
     private val xwtInput = TextArea()
     private val formNode = VBox(nameLabel, nameInput, listLabel, xwtInput)
-    private val submitButton = Button("Create")
-    private val cancelButton = Button("Cancel")
+    private val submitButton = Button("Create").apply { styleClass.add("primary") }
+    private val cancelButton = Button("Cancel").apply { styleClass.add("secondary") }
     private val buttonNode = HBox(submitButton, cancelButton)
 
     init {
@@ -33,6 +33,7 @@ class CreatePlayer(serviceLocator: ServiceLocator): ViewInterface {
     }
 
     init {
+        node.id = "players"
         HBox.setHgrow(node, Priority.ALWAYS)
         buttonNode.styleClass.add("gap")
         formNode.styleClass.addAll("gap", "foreground")

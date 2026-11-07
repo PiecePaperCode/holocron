@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox
 
 class SettingsView(serviceLocator: ServiceLocator): ViewInterface {
     override var node = VBox()
-    private val resetButton = Button("Reset Everything")
+    private val resetButton = Button("Reset Everything").apply { styleClass.add("danger") }
 
     init {
         resetButton.addEventHandler(
@@ -19,6 +19,7 @@ class SettingsView(serviceLocator: ServiceLocator): ViewInterface {
     }
 
     init {
+        node.id = "settings"
         HBox.setHgrow(node, Priority.ALWAYS)
         node.styleClass.addAll("gap", "background")
         node.children.addAll(

@@ -3,7 +3,7 @@ package view
 import javafx.scene.control.Label
 
 class Title(text: String, size: Size = Size.BIG): ViewInterface {
-    override val node = Label(text)
+    override val node = Label(text.uppercase()).apply { isWrapText = true }
 
     init {
         when (size) {

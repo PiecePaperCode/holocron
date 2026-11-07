@@ -10,7 +10,7 @@ class PlayersView(serviceLocator: ServiceLocator): ViewInterface {
     private val title = Title("Players").node
     private val tableScroll = ScrollPane()
     private val table = GridPane()
-    private val addPlayerButton = Button("Add Player")
+    private val addPlayerButton = Button("Add Player").apply { styleClass.add("primary") }
 
     init {
         table.styleClass.addAll("gap", "foreground")
@@ -21,12 +21,12 @@ class PlayersView(serviceLocator: ServiceLocator): ViewInterface {
         for ((index, player) in players.withIndex()) {
             table.add(Label(player.name), 0, index + 1)
             table.add(Label(player.list), 1, index + 1)
-            val edit = Button("Edit")
+            val edit = Button("Edit").apply { styleClass.add("secondary") }
             edit.addEventHandler(
                 MouseEvent.MOUSE_CLICKED
             ) { serviceLocator.playerEvents.selectPlayer(index) }
             table.add(edit, 2, index + 1)
-            val remove = Button("Remove")
+            val remove = Button("Remove").apply { styleClass.add("danger") }
             remove.addEventHandler(
                 MouseEvent.MOUSE_CLICKED
             ) { serviceLocator.playerEvents.deletePlayer(index) }
@@ -53,6 +53,7 @@ class PlayersView(serviceLocator: ServiceLocator): ViewInterface {
     }
 
     init {
+        node.id = "players"
         HBox.setHgrow(node, Priority.ALWAYS)
         node.styleClass.addAll("gap", "background")
         node.children.addAll(

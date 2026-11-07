@@ -18,11 +18,12 @@ class TournamentView(
     private val nameNode = HBox(nameLabel, name)
     private val roundsTab = TabPane()
     private val tableScroll = ScrollPane()
-    private val generateRound = Button("Generate Round")
-    private val deleteRound = Button("Delete Last Round")
+    private val generateRound = Button("Generate Round").apply { styleClass.add("primary") }
+    private val deleteRound = Button("Delete Last Round").apply { styleClass.add("danger") }
     private val buttonNode = HBox(generateRound, deleteRound)
 
     init {
+        node.id = "tournament"
         HBox.setHgrow(node, Priority.ALWAYS)
         node.styleClass.addAll("gap", "background")
         roundsTab.styleClass.addAll("foreground")
@@ -52,7 +53,7 @@ class TournamentView(
             for ((index, match) in round.getMatches().withIndex()) {
                 matches.children.add(generateMatchView(match, index+1))
             }
-            val tab = Tab("Round${roundIndex + 1}")
+            val tab = Tab("ROUND ${roundIndex + 1}")
             tab.content = matches
             tab.isClosable = false
             roundsTab.tabs.add(tab)
@@ -103,16 +104,11 @@ class TournamentView(
             }
         }
         val grid = GridPane()
-        grid.styleClass.addAll("gap", "background")
-        val col = ColumnConstraints()
-        col.percentWidth = 33.3
+        grid.styleClass.addAll("gap", "match")
         grid.columnConstraints.addAll(
-            ColumnConstraints(50.0),
-            col,
-            ColumnConstraints(100.0),
-            ColumnConstraints(10.0),
-            ColumnConstraints(100.0),
-            col
+            listOf(8.0, 28.0, 12.0, 4.0, 12.0, 36.0).map { width ->
+                ColumnConstraints().apply { percentWidth = width }
+            }
         )
         val tableNumberLabel = Label("Nr. $tableNumber")
         grid.add(tableNumberLabel, 0, 0)
@@ -120,14 +116,17 @@ class TournamentView(
         grid.add(vs, 3, 0)
 
         for ((index, player) in match.getPlayers().withIndex()) {
-            val playerName = Title(player.name, Title.Size.SMALL).node
+            val playerName = Label(player.name).apply {
+                styleClass.add("match-player")
+                isWrapText = true
+            }
             playerName.alignment = Pos.BASELINE_RIGHT
             when (player.name) {
                 match.getWinner()?.name -> playerName.text = "${playerName.text} ✔️"
                 match.getLooser()?.name -> playerName.text = "${playerName.text} ❌"
             }
             if (index == 0) {
-                playerName.prefWidth = 5000.0
+                playerName.maxWidth = Double.MAX_VALUE
                 playerName.alignment = Pos.CENTER_RIGHT
                 grid.add(playerName, 1, 0)
                 grid.add(textFieldList[index], 2, 0)

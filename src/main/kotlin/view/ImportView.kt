@@ -18,14 +18,16 @@ class ImportView(serviceLocator: ServiceLocator) : ViewInterface {
         https://www.tabletopturniere.de/ch/t3_tournament.php?tid=<ID>
     """.trimIndent())
     private val textField = TextField()
-    private val importButton = Button("Import")
+    private val importButton = Button("Import").apply { styleClass.add("primary") }
 
     init {
         importButton.addEventHandler(
             MouseEvent.MOUSE_CLICKED
         ) { serviceLocator.importEvents.importPlayers(textField.text) }
+        node.id = "import"
         HBox.setHgrow(node, Priority.ALWAYS)
-        node.styleClass.addAll("gap", "foreground")
+        node.styleClass.addAll("gap", "background")
+        description.isWrapText = true
         node.children.addAll(
             title,
             description,

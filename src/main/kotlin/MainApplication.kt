@@ -18,6 +18,8 @@ class MainApplication : Application() {
 
     override fun start(stage: Stage) {
         stage.title = "Holocron"
+        stage.minWidth = 1080.0
+        stage.minHeight = 680.0
         stage.scene = layout.scene
         stage.show()
     }

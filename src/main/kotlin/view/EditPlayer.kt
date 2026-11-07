@@ -13,14 +13,14 @@ import javafx.scene.layout.VBox
 class EditPlayer(serviceLocator: ServiceLocator, index: Int): ViewInterface {
     override val node = VBox()
     private val player = serviceLocator.tournament.getPlayers()[index]
-    private val title = Title("Create Player").node
+    private val title = Title("Edit Player").node
     private val nameLabel = Label("Name")
     private val nameInput = TextField()
     private val listLabel = Label("XWT List")
     private val xwtInput = TextArea()
     private val formNode = VBox(nameLabel, nameInput, listLabel, xwtInput)
-    private val updateButton = Button("Update")
-    private val cancelButton = Button("Cancel")
+    private val updateButton = Button("Update").apply { styleClass.add("primary") }
+    private val cancelButton = Button("Cancel").apply { styleClass.add("secondary") }
     private val buttonNode = HBox(updateButton, cancelButton)
 
     init {
@@ -45,6 +45,7 @@ class EditPlayer(serviceLocator: ServiceLocator, index: Int): ViewInterface {
     }
 
     init {
+        node.id = "players"
         HBox.setHgrow(node, Priority.ALWAYS)
         buttonNode.styleClass.add("gap")
         formNode.styleClass.addAll("gap", "foreground")
